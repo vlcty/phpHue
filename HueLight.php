@@ -101,6 +101,11 @@ class HueLight
         return true;
     }
 
+    /**
+     * Turns on the light. If the light is already on nothing will happen.
+     *
+     * @return void
+     **/
     public function turnOn() {
         $pest = $this->parent->makePest();
         $pest->put(sprintf('lights/%d/state', $this->id),
@@ -111,6 +116,11 @@ class HueLight
         $this->isOn = true;
     }
 
+    /**
+     * Turns off the light. If the light is already off nothing will happen.
+     *
+     * @return void
+     **/
     public function turnOff() {
         $pest = $this->parent->makePest();
         $pest->put(sprintf('lights/%d/state', $this->id),
@@ -121,6 +131,12 @@ class HueLight
         $this->isOn = false;
     }
 
+    /**
+     * Toogles the state of the light.
+     * If the light is on it will turn off and vice versa.
+     *
+     * @return void
+     **/
     public function toggleState() {
         if ( $this->isOn == true )
             $this->turnOff();
