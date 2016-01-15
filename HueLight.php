@@ -33,10 +33,8 @@ class HueLight
     private $brightness = 0; // 0 to 254
     private $hue = 0; // 0 to 65535
     private $satiscation = 0; // 0 to 255
-    private $ct = 0; // 0 to 500
     private $alert = "none"; // "none", "select" or "lselect"
     private $effect = 'none';
-    private $colormode = "none"; // "hs", "xy" or "ct"
 
     /**
      * Constructs a new light
@@ -73,11 +71,8 @@ class HueLight
             # Field $data['state']['hue'] does not exist. Remove this?
             $this->setValueForMemberFromArray($this->hue, $data, 'hue');
             $this->setValueForMemberFromArray($this->satisfaction, $data, 'sat');
-            $this->setValueForMemberFromArray($this->ct, $data, 'ct');
             $this->setValueForMemberFromArray($this->alert, $data, 'alert');
             $this->setValueForMemberFromArray($this->effect, $data, 'effect');
-            $this->setValueForMemberFromArray($this->colormode, $data,
-                'colormode');
         }
     }
 
@@ -221,11 +216,6 @@ class HueLight
         return $this->satisfaction;
     }
 
-    public function getCt()
-    {
-        return $this->ct;
-    }
-
     public function getAlert()
     {
         return $this->alert;
@@ -234,11 +224,6 @@ class HueLight
     public function getEffect()
     {
         return $this->effect;
-    }
-
-    public function getColormode()
-    {
-        return $this->colormode;
     }
 
     /**
