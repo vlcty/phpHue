@@ -88,84 +88,70 @@ class HueLight
         return $this->id;
     }
 
-
     public function name()
     {
         return $this->name;
     }
-
 
     public function type()
     {
         return $this->type;
     }
 
-
     public function modelid()
     {
         return $this->modelid;
     }
-
 
     public function swversion()
     {
         return $this->swversion;
     }
 
-
     public function state()
     {
         return $this->state;
     }
-
 
     public function reachable()
     {
         return $this->reachable;
     }
 
-
     public function bri()
     {
         return $this->bri;
     }
-
 
     public function hue()
     {
         return $this->hue;
     }
 
-
     public function sat()
     {
         return $this->sat;
     }
-
 
     public function ct()
     {
         return $this->ct;
     }
 
-
     public function alert()
     {
         return $this->alert;
     }
-
 
     public function effect()
     {
         return $this->effect;
     }
 
-
     public function colormode()
     {
         return $this->colormode;
     }
-
 
     // Sets the alert state. 'select' blinks once, 'lselect' blinks repeatedly, 'none' turns off blinking
     public function setAlert( $type = 'select' )
@@ -177,7 +163,6 @@ class HueLight
         $this->parent->update( $this->id );
     }
 
-
     // Sets the effect state. 'colorloop' cycles through all hues using the current brightness and saturation settings, 'none' turns off the effect
     public function setEffect( $type = 'colorloop' )
     {
@@ -188,7 +173,6 @@ class HueLight
         $this->parent->update( $this->id );
     }
 
-
     // Sets the state property
     public function setLight( $input )
     {
@@ -198,7 +182,6 @@ class HueLight
 
         $this->parent->update( $this->id );
     }
-
 
     // Sets a new name
     public function setName( $name )
