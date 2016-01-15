@@ -11,6 +11,10 @@ class HueLight
     const COLOR_PINK = array('hue' => 182 * 300, 'sat' => 254, 'bri' => 254 );
     const COLOR_PURPLE = array('hue' => 182 * 270, 'sat' => 254, 'bri' => 254 );
 
+    const SATISFACTION_LOWEST = 1;
+    const SATISFACTION_MIDDLE = 128;
+    const SATISFACTION_HIGHEST = 254;
+
     private $parent;
     private $id = 0;
     private $name = "";
@@ -128,6 +132,33 @@ class HueLight
             json_encode($newColor));
     }
 
+    /**
+     * Sets the color satisfaction.
+     * Values can be betwenn 1 and 254 (included).
+     *
+     * 1   = The less satisfied
+     * 254 = The most satisfied
+     *
+     * @
+     **/
+    public function setSatisfaction($newSatisfaction) {
+        if ( $newSatisfaction < HueLight::SATISFACTION_LOWEST ||
+            $newSatisfaction > HueLight::SATISFACTION_HIGHEST ) {
+            throw new InvalidArgumentException(
+                sprintf('Values must be between %d and %d',
+                    HueLight::SATISFACTION_LOWEST,
+                    HueLight::SATISFACTION_HIGHEST));
+        }
+
+        $pest = $this->parent->makePest();
+        $pest->put(sprintf('lights/%d/state', $this->id),
+            json_encode(array(
+                'sat' => $newSatisfaction
+            )));
+
+        $this->satisfaction = $newSatisfaction;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -177,9 +208,9 @@ class HueLight
         return $this->hue;
     }
 
-    public function getSat()
+    public function getSatisfaction()
     {
-        return $this->sat;
+        return $this->satisfaction;
     }
 
     public function getCt()
