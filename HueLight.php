@@ -144,6 +144,12 @@ class HueLight
             $this->turnOn();
     }
 
+    /**
+     * Sets the new color
+     *
+     * @param $newColor array The new color
+     * @return void
+     **/
     public function setColor($newColor) {
         $pest = $this->parent->makePest();
         $pest->put(sprintf('lights/%d/state', $this->id),
