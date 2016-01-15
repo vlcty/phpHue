@@ -6,7 +6,6 @@ class HueBridge
 {
     private $bridgeAddress;
     private $authKey;
-    private $lights;
 
     /**
      * Construct a new HueBridge connection
@@ -27,36 +26,11 @@ class HueBridge
 
         $this->bridgeAddress = $bridgeAddress;
         $this->authKey = $authKey;
-
-        $this->update();
     }
 
     public function makePest()
     {
         return new Pest( "http://" .$this->bridgeAddress. "/api/" .$this->authKey. "/" );
-    }
-
-    private function makeLightArray( $lightid = false )
-    {
-        $targets = array();
-
-        if ( $lightid === false )
-        {
-            $targets = $this->lightIds();
-        }
-        else
-        {
-            if ( !is_array( $lightid ) )
-            {
-                $targets[] = $lightid;
-            }
-            else
-            {
-                $targets = $lightid;
-            }
-        }
-
-        return $targets;
     }
 
     /**
@@ -96,31 +70,23 @@ class HueBridge
         }
     }
 
-    public function update( $lightid = false )
-    {
-        $lights = $this->makeLightArray( $lightid );
-        foreach ( $lights as $id )
-        {
-            $pest = $this->makePest();
-            $data = $pest->get( "lights/$id" );
+    public function getLights() {
+        $lights = array();
 
-            $this->lights[ $id ] = new HueLight( $this, $id, $data );
-        }
-    }
-
-    public function lights()
-    {
-        return $this->lights;
-    }
-
-    // Returns an array of the light numbers in the system
-    public function lightIds()
-    {
         $pest = $this->makePest();
-        $result = json_decode( $pest->get( 'lights' ), true );
-        $targets = array_keys( $result );
+        $result = json_decode($pest->get('lights'), true);
 
-        return $targets;
+        if ( is_null($result) ) {
+            throw new HueError('Was not able to retrieve lights');
+        }
+
+        foreach ( array_keys($result) as $currentLight ) {
+            $lights[] = new HueLight($this,
+                (int) $currentLight,
+                $result[$currentLight]);
+        }
+
+        return $lights;
     }
 
     // Gets the full state of the bridge
