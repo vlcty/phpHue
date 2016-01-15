@@ -1,15 +1,15 @@
 <?php
 class HueLight
 {
-    const COLOR_GREEN = array('hue' => 182 * 140, 'sat' => 254, 'bri' => 254 );
-    const COLOR_RED = array('hue' => 0, 'sat' => 254, 'bri' => 254 );
-    const COLOR_BLUE = array('hue' => 182 * 250, 'sat' => 254, 'bri' => 254 );
-    const COLOR_COOLWHITE = array('hue' => 150, 'sat' => 254, 'bri' => 254 );
-    const COLOR_WARMWHITE = array('hue' => 500, 'sat' => 254, 'bri' => 254 );
-    const COLOR_ORANGE = array('hue' => 182 * 25, 'sat' => 254, 'bri' => 254 );
-    const COLOR_YELLOW = array('hue' => 182 * 85, 'sat' => 254, 'bri' => 254 );
-    const COLOR_PINK = array('hue' => 182 * 300, 'sat' => 254, 'bri' => 254 );
-    const COLOR_PURPLE = array('hue' => 182 * 270, 'sat' => 254, 'bri' => 254 );
+    const COLOR_GREEN = 182 * 140;
+    const COLOR_RED = 0;
+    const COLOR_BLUE = 182 * 250;
+    const COLOR_COOLWHITE = 150;
+    const COLOR_WARMWHITE = 500;
+    const COLOR_ORANGE = 182 * 25;
+    const COLOR_YELLOW = 182 * 85;
+    const COLOR_PINK = 182 * 300;
+    const COLOR_PURPLE = 182 * 270;
 
     const SATISFACTION_LOWEST = 1;
     const SATISFACTION_MIDDLE = 128;
@@ -163,7 +163,9 @@ class HueLight
     public function setColor($newColor) {
         $pest = $this->parent->makePest();
         $pest->put(sprintf('lights/%d/state', $this->id),
-            json_encode($newColor));
+            json_encode(array(
+                'hue' => $newColor
+            )));
     }
 
     /**
@@ -302,28 +304,6 @@ class HueLight
             json_encode(array(
                 'name' => $newName
             )));
-    }
-
-    // Gin up a random color
-    public function randomColor()
-    {
-        $return = array();
-
-        $return['hue'] = rand( 0, 65535 );
-        $return['sat'] = rand( 0, 254 );
-        $return['bri'] = rand( 0, 254 );
-
-        return $return;
-    }
-
-    // Gin up a random temp-based white setting
-    public static function randomWhite()
-    {
-        $return = array();
-        $return['ct'] = rand( 150, 500 );
-        $return['bri'] = rand( 0, 255 );
-
-        return $return;
     }
 }
 ?>
