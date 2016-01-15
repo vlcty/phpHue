@@ -18,6 +18,10 @@ class HueLight
     const EFFECT_NONE = 'none';
     const EFFECT_COLORLOOP = 'colorloop';
 
+    const ALERT_NONE = 'none';
+    const ALERT_SELECT = 'select';
+    const ALERT_LSELECT = 'lselect';
+
     private $parent;
     private $id = 0;
     private $name = "";
@@ -237,14 +241,21 @@ class HueLight
         return $this->colormode;
     }
 
-    // Sets the alert state. 'select' blinks once, 'lselect' blinks repeatedly, 'none' turns off blinking
-    public function setAlert( $type = 'select' )
-    {
-        $data = json_encode( array( "alert" => $type ) );
+    /**
+     * Sets the alert. From the official API docs:
+     * The alert effect, is a temporary change to the bulb’s state.
+     *
+     * Have a look at HueLight::ALERT_*
+     *
+     * @param $newAlert string The new alert
+     * @return void
+     **/
+    public function setAlert($newAlert) {
         $pest = $this->parent->makePest();
-        $pest->put( "lights/" .$this->id. "/state", $data );
-
-        $this->parent->update( $this->id );
+        $pest->put(sprintf('lights/%d/state', $this->id),
+            json_encode(array(
+                'alert' => $newEffect
+            )));
     }
 
     /**
