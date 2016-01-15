@@ -97,24 +97,20 @@ class HueLight
 
     public function turnOn() {
         $pest = $this->parent->makePest();
-        $result = $pest->put(sprintf('lights/%d/state', $this->id),
+        $pest->put(sprintf('lights/%d/state', $this->id),
             json_encode(array(
                 'on' => true
             )));
-
-        print_r($result);
 
         $this->isOn = true;
     }
 
     public function turnOff() {
         $pest = $this->parent->makePest();
-        $result = $pest->put(sprintf('lights/%d/state', $this->id),
+        $pest->put(sprintf('lights/%d/state', $this->id),
             json_encode(array(
                 'on' => false
             )));
-
-            print_r($result);
 
         $this->isOn = false;
     }
