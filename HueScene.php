@@ -44,6 +44,20 @@ class HueScene {
         }
     }
 
+    private function refreshLights($lightsWanted) {
+        $this->lights = array();
+        $lights = $this->bridge->getLights();
+
+        foreach ( $lightsWanted as $currentLightID ) {
+            foreach ( $lights as $currentLight ) {
+                if ( $currentLightID == $currentLight->getId() ) {
+                    $this->lights[] = &$currentLight;
+                    break;
+                }
+            }
+        }
+    }
+
     /**
      * It also does stuff :-)
      **/
@@ -54,8 +68,7 @@ class HueScene {
         $this->setValueForMemberFromArray($this->locked, 'locked', $data);
         $this->setValueForMemberFromArray($this->lastupdated, 'lastupdated', $data);
 
-        // Get all the lights
-        // TODO: Implement this function after function in HueLight is added
+        $this->refreshLights($data['lights']);
     }
 
     /**
@@ -64,12 +77,14 @@ class HueScene {
      * @return void
      **/
     public function update() {
-        $this->lights = array();
-
         $pest = $this->bridge->makePest();
-        $response = json_decode($pest->get('scenes/'. $this->id), true);
 
+        // Fetch scene info
+        $response = json_decode($pest->get('scenes/'. $this->id), true);
         $this->extractObjectInfoFromArray($response);
+
+        // Fetch lights
+        $this->refreshLights($response['lights']);
     }
 
     public function getId() {
