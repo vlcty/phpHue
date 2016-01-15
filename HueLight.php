@@ -15,6 +15,10 @@ class HueLight
     const SATISFACTION_MIDDLE = 128;
     const SATISFACTION_HIGHEST = 254;
 
+    const BRIGHTNESS_LOWEST = 1;
+    const BRIGHTNESS_NORMAL = 128;
+    const BRIGHTNESS_HIGHEST = 254;
+
     const EFFECT_NONE = 'none';
     const EFFECT_COLORLOOP = 'colorloop';
 
@@ -303,6 +307,30 @@ class HueLight
         $pest->put(sprintf('lights/%d', $this->id),
             json_encode(array(
                 'name' => $newName
+            )));
+    }
+
+    /**
+     * Sets the lights brightness
+     * Hint: Have a look at the constants HueLight::BRIGHTNESS_*
+     *
+     * @param $newBightness int The value for the new brightness
+     * @throws InvalidArgumentException If the brightness is out of bounds
+     * @return void
+     **/
+    public function setBrightness($newBrightness) {
+        if ( $newBrightness < HueLight::BRIGHTNESS_LOWEST ||
+            $newBrightness > HueLight::BRIGHTNESS_HIGHEST ) {
+            throw new InvalidArgumentException(
+                sprintf('Values must be between %d and %d',
+                    HueLight::BRIGHTNESS_LOWEST,
+                    HueLight::BRIGHTNESS_HIGHEST));
+        }
+
+        $pest = $this->parent->makePest();
+        $pest->put(sprintf('lights/%d/state', $this->id),
+            json_encode(array(
+                'bri' => $newBrightness
             )));
     }
 }
