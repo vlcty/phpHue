@@ -204,7 +204,7 @@ class HueLight
     }
 }
 
-class Hue
+class HueBridge
 {
     private $bridge;
     private $key;
