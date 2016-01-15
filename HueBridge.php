@@ -94,7 +94,25 @@ class HueBridge
 
         return $lights;
     }
-    
+
+    public function getScenes() {
+        $scenes = array();
+
+        $pest = $this->makePest();
+        $result = json_decode($pest->get('scenes'), true);
+
+        if ( is_null($result) )
+            throw new HueErro('Was not able to retrieve scenes');
+
+        foreach ( array_keys($result) as $currentScene ) {
+            $scenes[] = new HueScene($this,
+                $currentScene,
+                $result[$currentScene]);
+        }
+
+        return $scenes;
+    }
+
     // Gets an array of currently configured schedules
     public function schedules()
     {
