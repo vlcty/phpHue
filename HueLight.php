@@ -290,14 +290,18 @@ class HueLight
             )));
     }
 
-    // Sets a new name
-    public function setName( $name )
+    /**
+     * Sets the lights name
+     *
+     * @param $newName string The new name
+     **/
+    public function setName($newName)
     {
-        $data = json_encode( array( "name" => $name ) );
         $pest = $this->parent->makePest();
-        $pest->put( "lights/" .$this->id, $data );
-
-        $this->parent->update( $this->id );
+        $pest->put(sprintf('lights/%d', $this->id),
+            json_encode(array(
+                'name' => $newName
+            )));
     }
 
     // Gin up a random color
