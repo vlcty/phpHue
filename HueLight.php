@@ -27,8 +27,14 @@ class HueLight
     private $effect = "none"; // "none" or "colorloop"
     private $colormode = "none"; // "hs", "xy" or "ct"
 
-    public function __construct(&$parent, $lightid, $data )
-    {
+    /**
+     * Constructs a new light
+     *
+     * @param $parent HueBridge Reference to the HueBridge object
+     * @param $lightid int The light id
+     * @param $data array The decoded json from the API
+     **/
+    public function __construct(&$parent, $lightid, $data ) {
         $this->parent = $parent;
         $this->id = $lightid;
         $this->extractObjectInfoFromArray($data);
