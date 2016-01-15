@@ -7,8 +7,23 @@ class HueBridge
     private $authKey;
     private $lights;
 
+    /**
+     * Construct a new HueBridge connection
+     *
+     * @param $bridgeAddress string The IP or FQDN to a hue bridge
+     * @param $authKey string The 32 characters long auth key
+     * @throws InvalidArgumentException If one of the parameters is invalid
+     **/
     public function __construct($bridgeAddress, $authKey)
     {
+        if ( strlen($bridgeAddress) == 0 )
+            throw new InvalidArgumentException(
+                'Parameter $bridgeAddress is empty');
+
+        if ( strlen($authKey) != 32 )
+            throw new InvalidArgumentException(
+                'Parameter $authKey is invalid. Length has to be 32');
+
         $this->bridgeAddress = $bridgeAddress;
         $this->authKey = $authKey;
 
