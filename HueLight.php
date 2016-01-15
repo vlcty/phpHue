@@ -68,7 +68,6 @@ class HueLight
             $this->setValueForMemberFromArray($this->reachable, $data,
                 'reachable');
             $this->setValueForMemberFromArray($this->brightness, $data, 'bri');
-            # Field $data['state']['hue'] does not exist. Remove this?
             $this->setValueForMemberFromArray($this->hue, $data, 'hue');
             $this->setValueForMemberFromArray($this->satisfaction, $data, 'sat');
             $this->setValueForMemberFromArray($this->alert, $data, 'alert');
