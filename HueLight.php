@@ -21,7 +21,7 @@ class HueLight
     private $reachable = false;
     private $brightness = 0; // 0 to 254
     private $hue = 0; // 0 to 65535
-    private $sat = 0; // 0 to 255
+    private $satiscation = 0; // 0 to 255
     private $ct = 0; // 0 to 500
     private $alert = "none"; // "none", "select" or "lselect"
     private $effect = "none"; // "none" or "colorloop"
@@ -61,7 +61,7 @@ class HueLight
             $this->setValueForMemberFromArray($this->brightness, $data, 'bri');
             # Field $data['state']['hue'] does not exist. Remove this?
             $this->setValueForMemberFromArray($this->hue, $data, 'hue');
-            $this->setValueForMemberFromArray($this->sat, $data, 'sat');
+            $this->setValueForMemberFromArray($this->satisfaction, $data, 'sat');
             $this->setValueForMemberFromArray($this->ct, $data, 'ct');
             $this->setValueForMemberFromArray($this->alert, $data, 'alert');
             $this->setValueForMemberFromArray($this->effect, $data, 'effect');
@@ -120,6 +120,12 @@ class HueLight
             $this->turnOff();
         else
             $this->turnOn();
+    }
+
+    public function setColor($newColor) {
+        $pest = $this->parent->makePest();
+        $pest->put(sprintf('lights/%d/state', $this->id),
+            json_encode($newColor));
     }
 
     public function getId()
