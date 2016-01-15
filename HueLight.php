@@ -17,7 +17,7 @@ class HueLight
     private $type = "";
     private $modelid = "";
     private $swversion = "";
-    private $state = false;
+    private $isOn = false;
     private $reachable = false;
     private $brightness = 0; // 0 to 254
     private $hue = 0; // 0 to 65535
@@ -55,7 +55,7 @@ class HueLight
                 'modelid');
             $this->setValueForMemberFromArray($this->swversion, $data,
                 'swversion');
-            $this->setValueForMemberFromArray($this->state, $data, 'on');
+            $this->setValueForMemberFromArray($this->isOn, $data, 'on');
             $this->setValueForMemberFromArray($this->reachable, $data,
                 'reachable');
             $this->setValueForMemberFromArray($this->brightness, $data, 'bri');
@@ -95,6 +95,37 @@ class HueLight
         return true;
     }
 
+    public function turnOn() {
+        $pest = $this->parent->makePest();
+        $result = $pest->put(sprintf('lights/%d/state', $this->id),
+            json_encode(array(
+                'on' => true
+            )));
+
+        print_r($result);
+
+        $this->isOn = true;
+    }
+
+    public function turnOff() {
+        $pest = $this->parent->makePest();
+        $result = $pest->put(sprintf('lights/%d/state', $this->id),
+            json_encode(array(
+                'on' => false
+            )));
+
+            print_r($result);
+
+        $this->isOn = false;
+    }
+
+    public function toggleState() {
+        if ( $this->isOn == true )
+            $this->turnOff();
+        else
+            $this->turnOn();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -120,9 +151,8 @@ class HueLight
         return $this->swversion;
     }
 
-    public function getState()
-    {
-        return $this->state;
+    public function isOn() {
+        return $this->isOn;
     }
 
     public function isReachable()
