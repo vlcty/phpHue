@@ -42,8 +42,7 @@ class HueLight
      * @return void
      **/
     private function extractObjectInfoFromArray($data) {
-        if ( isset( $data["state"] ) )
-        {
+        if ( array_key_exists('state', $data) ) {
             $this->setValueForMemberFromArray($this->name, $data, 'name');
             $this->setValueForMemberFromArray($this->type, $data, 'type');
             $this->setValueForMemberFromArray($this->modelid, $data,
