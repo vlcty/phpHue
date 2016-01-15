@@ -81,72 +81,72 @@ class HueLight
         return true;
     }
 
-    public function id()
+    public function getId()
     {
         return $this->id;
     }
 
-    public function name()
+    public function getName()
     {
         return $this->name;
     }
 
-    public function type()
+    public function getType()
     {
         return $this->type;
     }
 
-    public function modelid()
+    public function getModelId()
     {
         return $this->modelid;
     }
 
-    public function swversion()
+    public function getSoftwareVersion()
     {
         return $this->swversion;
     }
 
-    public function state()
+    public function getState()
     {
         return $this->state;
     }
 
-    public function reachable()
+    public function isReachable()
     {
         return $this->reachable;
     }
 
-    public function bri()
+    public function getBri()
     {
         return $this->bri;
     }
 
-    public function hue()
+    public function getHue()
     {
         return $this->hue;
     }
 
-    public function sat()
+    public function getSat()
     {
         return $this->sat;
     }
 
-    public function ct()
+    public function getCt()
     {
         return $this->ct;
     }
 
-    public function alert()
+    public function getAlert()
     {
         return $this->alert;
     }
 
-    public function effect()
+    public function getEffect()
     {
         return $this->effect;
     }
 
-    public function colormode()
+    public function getColormode()
     {
         return $this->colormode;
     }
