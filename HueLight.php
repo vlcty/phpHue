@@ -27,11 +27,9 @@ class HueLight
     private $effect = "none"; // "none" or "colorloop"
     private $colormode = "none"; // "hs", "xy" or "ct"
 
-
-    public function __construct( $parent, $lightid, $json )
+    public function __construct(&$parent, $lightid, $data )
     {
         $this->parent = $parent;
-        $data = json_decode( $json, true );
 
         if ( isset( $data["state"] ) )
         {
