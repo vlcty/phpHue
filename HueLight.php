@@ -77,6 +77,17 @@ class HueLight
     }
 
     /**
+     * Refreshs the lighs object information
+     *
+     * @return void
+     **/
+    public function refresh() {
+        $pest = $this->parent->makePest();
+        $this->extractObjectInfoFromArray(
+            json_decode($pest->get('lights/' . $this->id), true));
+    }
+
+    /**
      * This function searches the value of a key from an array.
      * If no value is found on the first try the subarray 'state' is searched
      * if present.
