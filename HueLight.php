@@ -139,7 +139,8 @@ class HueLight
      * 1   = The less satisfied
      * 254 = The most satisfied
      *
-     * @
+     * @param $newSatisfaction int The new satisfaction
+     * @throws InvalidArgumentException If the satisfaction is out of bounds
      **/
     public function setSatisfaction($newSatisfaction) {
         if ( $newSatisfaction < HueLight::SATISFACTION_LOWEST ||
