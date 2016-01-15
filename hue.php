@@ -2,7 +2,7 @@
 
 require( __DIR__ . '/pest-master/PestJSON.php' );
 
-class Light
+class HueLight
 {
     private $parent;
     private $id = 0;
@@ -269,7 +269,7 @@ class Hue
             $pest = $this->makePest();
             $data = $pest->get( "lights/$id" );
 
-            $this->lights[ $id ] = new Light( $this, $id, $data );
+            $this->lights[ $id ] = new HueLight( $this, $id, $data );
         }
     }
 
