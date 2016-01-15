@@ -19,7 +19,7 @@ class HueLight
     private $swversion = "";
     private $state = false;
     private $reachable = false;
-    private $bri = 0; // 0 to 255
+    private $brightness = 0; // 0 to 254
     private $hue = 0; // 0 to 65535
     private $sat = 0; // 0 to 255
     private $ct = 0; // 0 to 500
@@ -58,7 +58,7 @@ class HueLight
             $this->setValueForMemberFromArray($this->state, $data, 'on');
             $this->setValueForMemberFromArray($this->reachable, $data,
                 'reachable');
-            $this->setValueForMemberFromArray($this->bri, $data, 'bri');
+            $this->setValueForMemberFromArray($this->brightness, $data, 'bri');
             # Field $data['state']['hue'] does not exist. Remove this?
             $this->setValueForMemberFromArray($this->hue, $data, 'hue');
             $this->setValueForMemberFromArray($this->sat, $data, 'sat');
@@ -130,9 +130,14 @@ class HueLight
         return $this->reachable;
     }
 
-    public function getBri()
+    /**
+     * Returns the brightness
+     *
+     * @return int The value between 0 and 255
+     **/
+    public function getBrightness()
     {
-        return $this->bri;
+        return $this->brightness;
     }
 
     public function getHue()
