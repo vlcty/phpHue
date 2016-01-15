@@ -70,6 +70,12 @@ class HueBridge
         }
     }
 
+    /**
+     * Get all known lights
+     *
+     * @return array Containing HueLight objects
+     * @throws HueError If no communication with the API was possible
+     **/
     public function getLights() {
         $lights = array();
 
@@ -88,14 +94,7 @@ class HueBridge
 
         return $lights;
     }
-
-    // Gets the full state of the bridge
-    public function state()
-    {
-        $pest = $this->makePest();
-        return $pest->get( "" );
-    }
-
+    
     // Gets an array of currently configured schedules
     public function schedules()
     {
