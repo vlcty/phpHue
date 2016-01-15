@@ -199,5 +199,89 @@ class HueLight
 
         $this->parent->update( $this->id );
     }
+
+    // Gin up a random color
+    public function randomColor()
+    {
+        $return = array();
+
+        $return['hue'] = rand( 0, 65535 );
+        $return['sat'] = rand( 0, 254 );
+        $return['bri'] = rand( 0, 254 );
+
+        return $return;
+    }
+
+    // Gin up a random temp-based white setting
+    public static function randomWhite()
+    {
+        $return = array();
+        $return['ct'] = rand( 150, 500 );
+        $return['bri'] = rand( 0, 255 );
+
+        return $return;
+    }
+
+    // Build a few color commands based on color names
+    public static function predefinedColors( $colorname )
+    {
+        $command = array();
+        switch ( $colorname )
+        {
+            case "green":
+                $command['hue'] = 182 * 140;
+                $command['sat'] = 254;
+                $command['bri'] = 254;
+                break;
+
+            case "red":
+                $command['hue'] = 0;
+                $command['sat'] = 254;
+                $command['bri'] = 254;
+                break;
+
+            case "blue":
+                $command['hue'] = 182 * 250;
+                $command['sat'] = 254;
+                $command['bri'] = 254;
+                break;
+
+            case "coolwhite":
+                $command['ct']  = 150;
+                $command['bri'] = 254;
+                break;
+
+            case "warmwhite":
+                $command['ct']  = 500;
+                $command['bri'] = 254;
+                break;
+
+            case "orange":
+                $command['hue'] = 182 * 25;
+                $command['sat'] = 254;
+                $command['bri'] = 254;
+                break;
+
+            case "yellow":
+                $command['hue'] = 182 * 85;
+                $command['sat'] = 254;
+                $command['bri'] = 254;
+                break;
+
+            case "pink":
+                $command['hue'] = 182 * 300;
+                $command['sat'] = 254;
+                $command['bri'] = 254;
+                break;
+
+            case "purple":
+                $command['hue'] = 182 * 270;
+                $command['sat'] = 254;
+                $command['bri'] = 254;
+                break;
+        }
+
+        return $command;
+    }
 }
 ?>
