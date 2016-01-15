@@ -30,11 +30,20 @@ class HueLight
     public function __construct(&$parent, $lightid, $data )
     {
         $this->parent = $parent;
+        $this->id = $lightid;
+        $this->extractObjectInfoFromArray($data);
+    }
 
+    /**
+     * Extract the object info from an array and stores them in the right
+     * member variables
+     *
+     * @param $data array The array containing the data
+     * @return void
+     **/
+    private function extractObjectInfoFromArray($data) {
         if ( isset( $data["state"] ) )
         {
-            $this->id = $lightid;
-
             $this->setValueForMemberFromArray($this->name, $data, 'name');
             $this->setValueForMemberFromArray($this->type, $data, 'type');
             $this->setValueForMemberFromArray($this->modelid, $data,
