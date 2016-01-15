@@ -273,16 +273,6 @@ class HueLight
             )));
     }
 
-    // Sets the state property
-    public function setLight( $input )
-    {
-        $data = json_encode( $input );
-        $pest = $this->parent->makePest();
-        $pest->put( "lights/" .$this->id. "/state", $data );
-
-        $this->parent->update( $this->id );
-    }
-
     // Sets a new name
     public function setName( $name )
     {
