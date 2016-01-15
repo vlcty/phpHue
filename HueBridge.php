@@ -3,21 +3,21 @@ require( __DIR__ . '/pest-master/PestJSON.php' );
 
 class HueBridge
 {
-    private $bridge;
-    private $key;
+    private $bridgeAddress;
+    private $authKey;
     private $lights;
 
-    public function __construct( $bridge, $key )
+    public function __construct($bridgeAddress, $authKey)
     {
-        $this->bridge = $bridge;
-        $this->key = $key;
+        $this->bridgeAddress = $bridgeAddress;
+        $this->authKey = $authKey;
 
         $this->update();
     }
 
     public function makePest()
     {
-        return new Pest( "http://" .$this->bridge. "/api/" .$this->key. "/" );
+        return new Pest( "http://" .$this->bridgeAddress. "/api/" .$this->authKey. "/" );
     }
 
     private function makeLightArray( $lightid = false )
