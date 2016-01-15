@@ -15,6 +15,9 @@ class HueLight
     const SATISFACTION_MIDDLE = 128;
     const SATISFACTION_HIGHEST = 254;
 
+    const EFFECT_NONE = 'none';
+    const EFFECT_COLORLOOP = 'colorloop';
+
     private $parent;
     private $id = 0;
     private $name = "";
@@ -28,7 +31,7 @@ class HueLight
     private $satiscation = 0; // 0 to 255
     private $ct = 0; // 0 to 500
     private $alert = "none"; // "none", "select" or "lselect"
-    private $effect = "none"; // "none" or "colorloop"
+    private $effect = 'none';
     private $colormode = "none"; // "hs", "xy" or "ct"
 
     /**
@@ -244,14 +247,19 @@ class HueLight
         $this->parent->update( $this->id );
     }
 
-    // Sets the effect state. 'colorloop' cycles through all hues using the current brightness and saturation settings, 'none' turns off the effect
-    public function setEffect( $type = 'colorloop' )
-    {
-        $data = json_encode( array( "effect" => $type ) );
+    /**
+     * Sets the new effect.
+     * Possible values are stored in constants. Look at HueLight::EFFECT_*
+     *
+     * @param $newEffect string Name of the new effect.
+     * @return void
+     **/
+    public function setEffect($newEffect) {
         $pest = $this->parent->makePest();
-        $pest->put( "lights/" .$this->id. "/state", $data );
-
-        $this->parent->update( $this->id );
+        $pest->put(sprintf('lights/%d/state', $this->id),
+            json_encode(array(
+                'effect' => $newEffect
+            )));
     }
 
     // Sets the state property
