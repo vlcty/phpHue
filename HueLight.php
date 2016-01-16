@@ -170,6 +170,8 @@ class HueLight
             json_encode(array(
                 'hue' => $newColor
             )));
+
+        $this->hue = $newColor;
     }
 
     /**
@@ -244,7 +246,7 @@ class HueLight
         return $this->brightness;
     }
 
-    public function getHue()
+    public function getColor()
     {
         return $this->hue;
     }
