@@ -248,6 +248,8 @@ class HueLight
             json_encode(array(
                 'name' => $newName
             )));
+
+        $this->name = $newName;
     }
 
     /**
@@ -272,6 +274,8 @@ class HueLight
             json_encode(array(
                 'bri' => $newBrightness
             )));
+
+        $this->bri = $newBrightness;
     }
 
     public function getId()
