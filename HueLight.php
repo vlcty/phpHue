@@ -202,70 +202,6 @@ class HueLight
         $this->satisfaction = $newSatisfaction;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    public function getModelId()
-    {
-        return $this->modelid;
-    }
-
-    public function getSoftwareVersion()
-    {
-        return $this->swversion;
-    }
-
-    public function isOn() {
-        return $this->isOn;
-    }
-
-    public function isReachable()
-    {
-        return $this->reachable;
-    }
-
-    /**
-     * Returns the brightness
-     *
-     * @return int The value between 0 and 255
-     **/
-    public function getBrightness()
-    {
-        return $this->brightness;
-    }
-
-    public function getColor()
-    {
-        return $this->hue;
-    }
-
-    public function getSatisfaction()
-    {
-        return $this->satisfaction;
-    }
-
-    public function getAlert()
-    {
-        return $this->alert;
-    }
-
-    public function getEffect()
-    {
-        return $this->effect;
-    }
-
     /**
      * Sets the alert. From the official API docs:
      * The alert effect, is a temporary change to the bulb’s state.
@@ -334,6 +270,65 @@ class HueLight
             json_encode(array(
                 'bri' => $newBrightness
             )));
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getModelId()
+    {
+        return $this->modelid;
+    }
+
+    public function getSoftwareVersion()
+    {
+        return $this->swversion;
+    }
+
+    public function isOn() {
+        return $this->isOn;
+    }
+
+    public function isReachable()
+    {
+        return $this->reachable;
+    }
+
+    public function getBrightness()
+    {
+        return $this->brightness;
+    }
+
+    public function getColor()
+    {
+        return $this->hue;
+    }
+
+    public function getSatisfaction()
+    {
+        return $this->satisfaction;
+    }
+
+    public function getAlert()
+    {
+        return $this->alert;
+    }
+
+    public function getEffect()
+    {
+        return $this->effect;
     }
 }
 ?>
