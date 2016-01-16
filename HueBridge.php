@@ -1,6 +1,8 @@
 <?php
 require( __DIR__ . '/pest-master/PestJSON.php' );
 require(__DIR__ . '/HueError.php');
+require(__DIR__ . '/HueLight.php');
+require(__DIR__ . '/HueScene.php');
 
 class HueBridge
 {
