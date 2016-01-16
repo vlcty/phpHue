@@ -218,6 +218,9 @@ class HueLight
             json_encode(array(
                 'alert' => $newEffect
             )));
+
+        // No settig the member value because it's a temporary change
+        // of the lights properties
     }
 
     /**
@@ -233,6 +236,8 @@ class HueLight
             json_encode(array(
                 'effect' => $newEffect
             )));
+
+        $this->effect = $newEffect;
     }
 
     /**
