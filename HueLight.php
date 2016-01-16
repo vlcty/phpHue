@@ -183,6 +183,7 @@ class HueLight
      *
      * @param $newSatisfaction int The new satisfaction
      * @throws InvalidArgumentException If the satisfaction is out of bounds
+     * @return void
      **/
     public function setSatisfaction($newSatisfaction) {
         if ( $newSatisfaction < HueLight::SATISFACTION_LOWEST ||
@@ -238,6 +239,7 @@ class HueLight
      * Sets the lights name
      *
      * @param $newName string The new name
+     * @return void
      **/
     public function setName($newName)
     {
