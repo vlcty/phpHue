@@ -1,5 +1,5 @@
 <?php
-class HueLight
+class HueLight implements JsonSerializable
 {
     const COLOR_GREEN = 182 * 140;
     const COLOR_RED = 0;
@@ -281,6 +281,22 @@ class HueLight
             )));
 
         $this->bri = $newBrightness;
+    }
+
+    public function jsonSerialize() {
+        return array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'type' => $this->type,
+            'modelid' => $this->modelid,
+            'swversion' => $this->swversion,
+            'isOn' => $this->isOn,
+            'isReachable' => $this->reachable,
+            'brightness' => $this->brightness,
+            'hue' => $this->hue,
+            'satisfaction' => $this->satisfaction,
+            'effect' => $this->effect
+        );
     }
 
     public function getId()
