@@ -26,4 +26,19 @@ catch ( InvalidArgumentException $ex ) {
 ?>
 ```
 
-If something f
+You can now access stuff via the bridge object. For example get all configured lights and print their names:
+
+```php
+$lights = $bridge->getLights();
+
+foreach ( $lights as &$currentLight ) {
+    echo($currentLight->getName() . ' is ');
+
+    if ( $currentLight->isReachable() ) {
+        echo("reachable\n");
+    }
+    else {
+        echo("not reachable\n");
+    }
+}
+```
